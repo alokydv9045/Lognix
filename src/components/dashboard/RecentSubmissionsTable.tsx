@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import { RECENT_SUBMISSIONS } from "@/constants/mockData";
+import { RECENT_SUBMISSIONS, SAMPLE_PROBLEMS } from "@/constants/mockData";
 import { NmCard } from "../ui/NmCard";
-import { CheckCircle2, XCircle, Clock, Cpu } from "lucide-react";
+import { CheckCircle2, XCircle } from "lucide-react";
 
 export function RecentSubmissionsTable() {
   return (
@@ -59,7 +59,7 @@ export function RecentSubmissionsTable() {
                   </td>
                   <td className="py-3 font-sans font-semibold text-[var(--nm-foreground)]">
                     <Link
-                      href={`/problems/two-sum`}
+                      href={`/problems/${SAMPLE_PROBLEMS.find((p) => p.id === sub.problemId)?.slug || "two-sum"}`}
                       className="hover:text-[var(--primary)] transition-colors"
                     >
                       {sub.problemTitle}

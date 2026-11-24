@@ -64,7 +64,10 @@ export function TopicDetailModal({ topic, onClose }: TopicDetailModalProps) {
           <span className="text-xs font-mono text-[var(--nm-muted-foreground)]">
             {topic.completedProblems}/{topic.totalProblems} Problems Completed
           </span>
-          <Link href="/problems" onClick={onClose}>
+          <Link
+            href={`/problems?search=${encodeURIComponent(topic.title.replace(/^[0-9.]+\s*/, ""))}`}
+            onClick={onClose}
+          >
             <NmButton variant="primary" size="sm" className="gap-1.5">
               Practice Topic Problems <ArrowRight className="w-3.5 h-3.5" />
             </NmButton>

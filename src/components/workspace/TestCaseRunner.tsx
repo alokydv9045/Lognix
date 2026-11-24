@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { TestCase, ExecutionStatus } from "@/types";
 import { Play, Send, CheckCircle2, XCircle, Clock, Cpu, Plus, AlertTriangle } from "lucide-react";
 import { NmButton } from "../ui/NmButton";
+import { MagneticButton } from "../animations/MagneticButton";
 
 interface TestCaseRunnerProps {
   testCases: TestCase[];
@@ -45,49 +46,52 @@ export function TestCaseRunner({
                 setSelectedCaseIdx(idx);
                 setIsCustomMode(false);
               }}
-              className={`px-3 py-1 text-xs font-mono font-semibold rounded-lg transition-all cursor-pointer ${
-                !isCustomMode && selectedCaseIdx === idx
-                  ? "nm-flat text-[var(--primary)] font-bold"
+              className={`px-3 py-1 text-xs font-mono font-semibold rounded-lg transition-all cursor-pointer ${!isCustomMode && selectedCaseIdx === idx
+                  ? "bg-[var(--nm-surface)] text-[var(--primary)] font-bold border border-[var(--nm-border)] shadow-sm"
                   : "text-[var(--nm-muted-foreground)] hover:text-[var(--nm-foreground)]"
-              }`}
+                }`}
             >
               Case {idx + 1}
             </button>
           ))}
           <button
             onClick={() => setIsCustomMode(true)}
-            className={`px-2.5 py-1 text-xs font-mono rounded-lg transition-all cursor-pointer flex items-center gap-1 ${
-              isCustomMode
-                ? "nm-flat text-[var(--primary)] font-bold"
+            className={`px-2.5 py-1 text-xs font-mono rounded-lg transition-all cursor-pointer flex items-center gap-1 ${isCustomMode
+                ? "bg-[var(--nm-surface)] text-[var(--primary)] font-bold border border-[var(--nm-border)] shadow-sm"
                 : "text-[var(--nm-muted-foreground)] hover:text-[var(--nm-foreground)]"
-            }`}
+              }`}
           >
             <Plus className="w-3 h-3" /> Custom
           </button>
         </div>
 
-        {/* Execution Actions */}
+        {/* Execution Actions with Magnetic Pull */}
         <div className="flex items-center gap-2">
-          <NmButton
-            variant="raised"
-            size="sm"
-            onClick={() => onRunCode(isCustomMode ? customInput : undefined)}
-            isLoading={isRunning}
-            className="gap-1.5 text-xs font-mono"
-          >
-            <Play className="w-3.5 h-3.5 fill-current" />
-            Run Code
-          </NmButton>
-          <NmButton
-            variant="primary"
-            size="sm"
-            onClick={onSubmitSolution}
-            isLoading={isRunning}
-            className="gap-1.5 text-xs font-mono"
-          >
-            <Send className="w-3.5 h-3.5" />
-            Submit
-          </NmButton>
+          <MagneticButton>
+            <NmButton
+              variant="raised"
+              size="sm"
+              onClick={() => onRunCode(isCustomMode ? customInput : undefined)}
+              isLoading={isRunning}
+              className="gap-1.5 text-xs font-mono"
+            >
+              <Play className="w-3.5 h-3.5 fill-current" />
+              Run Code
+            </NmButton>
+          </MagneticButton>
+
+          <MagneticButton>
+            <NmButton
+              variant="primary"
+              size="sm"
+              onClick={onSubmitSolution}
+              isLoading={isRunning}
+              className="gap-1.5 text-xs font-mono shadow-sm"
+            >
+              <Send className="w-3.5 h-3.5" />
+              Submit
+            </NmButton>
+          </MagneticButton>
         </div>
       </div>
 
@@ -100,7 +104,7 @@ export function TestCaseRunner({
               <p className="text-[11px] font-mono font-bold uppercase tracking-wider text-[var(--nm-muted-foreground)] mb-1">
                 Input Parameters
               </p>
-              <div className="p-3 rounded-xl nm-pressed text-xs font-mono text-[var(--nm-foreground)]">
+              <div className="p-3 rounded-xl bg-[var(--nm-surface-sunken)] border border-[var(--nm-border)] text-xs font-mono text-[var(--nm-foreground)]">
                 {testCases[selectedCaseIdx]?.input}
               </div>
             </div>
@@ -108,7 +112,7 @@ export function TestCaseRunner({
               <p className="text-[11px] font-mono font-bold uppercase tracking-wider text-[var(--nm-muted-foreground)] mb-1">
                 Expected Result
               </p>
-              <div className="p-3 rounded-xl nm-pressed text-xs font-mono text-[var(--primary)] font-bold">
+              <div className="p-3 rounded-xl bg-[var(--nm-surface-sunken)] border border-[var(--nm-border)] text-xs font-mono text-[var(--primary)] font-bold">
                 {testCases[selectedCaseIdx]?.expectedOutput}
               </div>
             </div>
@@ -122,7 +126,7 @@ export function TestCaseRunner({
               value={customInput}
               onChange={(e) => setCustomInput(e.target.value)}
               placeholder="e.g. nums = [1, 5, 9], target = 10"
-              className="w-full h-24 p-3 rounded-xl nm-pressed text-xs font-mono text-[var(--nm-foreground)] placeholder-[var(--nm-muted-foreground)] focus:outline-none focus:ring-1 focus:ring-[var(--primary)] resize-none"
+              className="w-full h-24 p-3 rounded-xl bg-[var(--nm-surface-sunken)] border border-[var(--nm-border)] text-xs font-mono text-[var(--nm-foreground)] placeholder-[var(--nm-muted-foreground)] focus:outline-none focus:ring-1 focus:ring-[var(--primary)] resize-none"
             />
           </div>
         )}
@@ -166,7 +170,7 @@ export function TestCaseRunner({
                 <p className="text-[11px] font-mono font-bold uppercase tracking-wider text-[var(--nm-muted-foreground)] mb-1">
                   Your Output
                 </p>
-                <div className="p-3 rounded-xl nm-pressed text-xs font-mono text-[var(--nm-foreground)]">
+                <div className="p-3 rounded-xl bg-[var(--nm-surface-sunken)] border border-[var(--nm-border)] text-xs font-mono text-[var(--nm-foreground)]">
                   {executionResult.output}
                 </div>
               </div>

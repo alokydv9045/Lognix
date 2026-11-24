@@ -38,15 +38,15 @@ const NAV_GROUPS: { group: string; items: NavItem[] }[] = [
   {
     group: "PREPARATION",
     items: [
-      { label: "Contests", href: "/problems#contests", icon: Trophy },
-      { label: "Company Sheets", href: "/problems#companies", icon: Briefcase },
-      { label: "Editorials", href: "/problems#editorials", icon: BookOpen },
+      { label: "Contests", href: "/contests", icon: Trophy, badge: "Live" },
+      { label: "Company Sheets", href: "/companies", icon: Briefcase, badge: "FAANG" },
+      { label: "Editorials", href: "/editorials", icon: BookOpen },
     ],
   },
   {
     group: "SYSTEM",
     items: [
-      { label: "Settings", href: "#settings", icon: Settings },
+      { label: "Settings", href: "/settings", icon: Settings },
     ],
   },
 ];

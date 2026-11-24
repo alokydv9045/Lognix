@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { RoadmapTopic } from "@/types";
-import { CheckCircle2, Lock, Play, Clock, BookOpen, ArrowRight, Sparkles } from "lucide-react";
+import { CheckCircle2, Lock, Play, Clock } from "lucide-react";
 import { NmBadge } from "../ui/NmBadge";
 import { NmButton } from "../ui/NmButton";
+import { SpotlightCard } from "../animations/SpotlightCard";
+import { AnimatedBeam } from "../animations/AnimatedBeam";
 
 interface RoadmapGraphProps {
   modules: RoadmapTopic[];
@@ -20,12 +22,14 @@ export function RoadmapGraph({ modules, onSelectTopic }: RoadmapGraphProps) {
           const isCompleted = topic.status === "completed";
           const isInProgress = topic.status === "in_progress";
           const isLocked = topic.status === "locked";
-          const percentage = Math.round((topic.completedProblems / topic.totalProblems) * 100);
+          const percentage = Math.round(
+            (topic.completedProblems / topic.totalProblems) * 100
+          );
 
           return (
-            <div
+            <SpotlightCard
               key={topic.id}
-              className={`p-6 rounded-3xl nm-flat border border-[var(--nm-border)] flex flex-col justify-between transition-all duration-200 relative overflow-hidden group hover:translate-y-[-2px] ${
+              className={`p-6 flex flex-col justify-between transition-all duration-200 relative overflow-hidden group hover:translate-y-[-2px] ${
                 isLocked ? "opacity-70" : ""
               }`}
             >
@@ -38,7 +42,7 @@ export function RoadmapGraph({ modules, onSelectTopic }: RoadmapGraphProps) {
                         <CheckCircle2 className="w-4 h-4" />
                       </span>
                     ) : isLocked ? (
-                      <span className="w-6 h-6 rounded-lg bg-[var(--nm-surface-sunken)] text-[var(--nm-muted-foreground)] flex items-center justify-center">
+                      <span className="w-6 h-6 rounded-lg bg-[var(--nm-surface-sunken)] text-[var(--nm-muted-foreground)] flex items-center justify-center border border-[var(--nm-border)]">
                         <Lock className="w-3.5 h-3.5" />
                       </span>
                     ) : (
@@ -67,7 +71,7 @@ export function RoadmapGraph({ modules, onSelectTopic }: RoadmapGraphProps) {
                   {topic.subtopics.slice(0, 3).map((sub, sIdx) => (
                     <span
                       key={sIdx}
-                      className="px-2 py-0.5 rounded-md text-[10px] font-mono nm-pressed-sm text-[var(--nm-muted-foreground)]"
+                      className="px-2 py-0.5 rounded-md text-[10px] font-mono bg-[var(--nm-surface-sunken)] border border-[var(--nm-border)] text-[var(--nm-muted-foreground)]"
                     >
                       {sub}
                     </span>
@@ -92,7 +96,7 @@ export function RoadmapGraph({ modules, onSelectTopic }: RoadmapGraphProps) {
                 </div>
 
                 {/* Track */}
-                <div className="h-1.5 w-full rounded-full bg-[var(--nm-surface-sunken)] nm-pressed-sm overflow-hidden">
+                <div className="h-1.5 w-full rounded-full bg-[var(--nm-surface-sunken)] border border-[var(--nm-border)] overflow-hidden">
                   <div
                     className={`h-full rounded-full transition-all duration-500 ${
                       isCompleted ? "bg-[var(--primary)]" : "bg-[var(--accent-orange)]"
@@ -102,19 +106,36 @@ export function RoadmapGraph({ modules, onSelectTopic }: RoadmapGraphProps) {
                 </div>
 
                 <NmButton
-                  variant={isCompleted ? "raised" : isInProgress ? "primary" : isLocked ? "ghost" : "raised"}
+                  variant={
+                    isCompleted
+                      ? "raised"
+                      : isInProgress
+                      ? "primary"
+                      : isLocked
+                      ? "ghost"
+                      : "raised"
+                  }
                   size="sm"
                   onClick={() => onSelectTopic(topic)}
                   disabled={isLocked}
                   className="w-full text-xs mt-1"
                 >
-                  {isCompleted ? "Review Concepts" : isInProgress ? "Continue Module" : isLocked ? "Prerequisites Locked" : "Start Module"}
+                  {isCompleted
+                    ? "Review Concepts"
+                    : isInProgress
+                    ? "Continue Module"
+                    : isLocked
+                    ? "Prerequisites Locked"
+                    : "Start Module"}
                 </NmButton>
               </div>
-            </div>
+            </SpotlightCard>
           );
         })}
       </div>
+
+      {/* Animmaster Style Animated Pulse Beam */}
+      <AnimatedBeam className="my-8" />
     </div>
   );
 }

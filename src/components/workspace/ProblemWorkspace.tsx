@@ -5,6 +5,7 @@ import { Problem, SupportedLanguage, ExecutionStatus } from "@/types";
 import { ProblemDescription } from "./ProblemDescription";
 import { MonacoEditorPane } from "./MonacoEditorPane";
 import { TestCaseRunner } from "./TestCaseRunner";
+import { DynamicIslandStatus } from "../animations/DynamicIslandStatus";
 
 interface ProblemWorkspaceProps {
   problem: Problem;
@@ -38,18 +39,20 @@ export function ProblemWorkspace({ problem }: ProblemWorkspaceProps) {
     setExecutionStatus("RUNNING");
     setExecutionResult(null);
 
-    // Simulated sandbox worker evaluation
     await new Promise((res) => setTimeout(res, 850));
 
-    // Realistic evaluation check
-    const isSuccess = code.includes("return") && (code.includes("lookup") || code.includes("res") || code.includes("max"));
+    const isSuccess =
+      code.includes("return") &&
+      (code.includes("lookup") || code.includes("res") || code.includes("max"));
 
     setExecutionStatus(isSuccess ? "AC" : "WA");
     setExecutionResult({
       status: isSuccess ? "AC" : "WA",
       runtimeMs: Math.floor(Math.random() * 40) + 35,
       memoryKb: Math.floor(Math.random() * 2000) + 16500,
-      output: isSuccess ? problem.testCases[0].expectedOutput : "[0, 0] (Failed to match target)",
+      output: isSuccess
+        ? problem.testCases[0].expectedOutput
+        : "[0, 0] (Failed to match target)",
       expected: problem.testCases[0].expectedOutput,
       errorMsg: isSuccess ? undefined : "Output does not match expected test output.",
     });
@@ -67,13 +70,26 @@ export function ProblemWorkspace({ problem }: ProblemWorkspaceProps) {
       status: isSuccess ? "AC" : "WA",
       runtimeMs: Math.floor(Math.random() * 50) + 38,
       memoryKb: 17400,
-      output: isSuccess ? "All 3/3 Test Cases Passed Successfully!" : "Test Case 2 Failed: Output mismatch.",
+      output: isSuccess
+        ? "All 3/3 Test Cases Passed Successfully!"
+        : "Test Case 2 Failed: Output mismatch.",
       expected: problem.testCases[0].expectedOutput,
     });
   };
 
   return (
-    <div className={`w-full transition-all ${isFullScreen ? "fixed inset-0 z-50 p-3 bg-[var(--nm-bg)]" : "h-[calc(100vh-6.5rem)]"}`}>
+    <div
+      className={`w-full transition-all ${
+        isFullScreen ? "fixed inset-0 z-50 p-3 bg-[var(--nm-bg)]" : "h-[calc(100vh-6.5rem)]"
+      }`}
+    >
+      {/* Skiper-UI Style Dynamic Island Floating Status */}
+      <DynamicIslandStatus
+        status={executionStatus}
+        runtimeMs={executionResult?.runtimeMs}
+        memoryKb={executionResult?.memoryKb}
+      />
+
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 h-full">
         {/* Left Specification Column */}
         <div className="lg:col-span-5 h-[400px] lg:h-full">

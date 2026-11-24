@@ -38,6 +38,15 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  letter-spacing: -0.02em;
+}
+
+code, kbd, samp, pre {
+  font-family: var(--font-mono);
+}
+
 /* Scrollbar Customization for Developer Workspace */
 ::-webkit-scrollbar {
   width: 8px;

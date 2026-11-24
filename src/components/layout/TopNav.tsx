@@ -19,6 +19,7 @@ import {
   Map,
   LayoutDashboard,
   Terminal,
+  Settings,
 } from "lucide-react";
 import { NmButton } from "../ui/NmButton";
 
@@ -199,6 +200,14 @@ export function TopNav({ onToggleMobileMenu, showSidebarToggle = false }: TopNav
                   >
                     <Map className="w-3.5 h-3.5 text-[var(--accent-orange)]" />
                     Curriculum Roadmap
+                  </Link>
+                  <Link
+                    href="/settings"
+                    onClick={() => setProfileOpen(false)}
+                    className="flex items-center gap-2 px-3 py-2 text-xs font-medium rounded-xl text-[var(--nm-foreground)] hover:bg-[var(--nm-surface-sunken)]"
+                  >
+                    <Settings className="w-3.5 h-3.5 text-[var(--accent-gold)]" />
+                    Settings & Preferences
                   </Link>
                   <button
                     onClick={() => {
