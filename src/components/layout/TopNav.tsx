@@ -52,8 +52,8 @@ export function TopNav({ onToggleMobileMenu, showSidebarToggle = false }: TopNav
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full px-4 pt-3 pb-2 backdrop-blur-md bg-[var(--nm-bg)]/80">
-      <div className="max-w-7xl mx-auto h-16 px-4 sm:px-6 rounded-2xl nm-flat border border-[var(--nm-border)] flex items-center justify-between gap-4">
+    <header className="sticky top-0 z-40 w-full px-4 pt-4 pb-2 backdrop-blur-md bg-[var(--nm-bg)]/85">
+      <div className="max-w-7xl mx-auto h-16 px-5 sm:px-7 rounded-full nm-pill-nav flex items-center justify-between gap-4">
         {/* Left Section: Brand & Sidebar Toggle */}
         <div className="flex items-center gap-3">
           {showSidebarToggle && onToggleMobileMenu && (
@@ -226,14 +226,14 @@ export function TopNav({ onToggleMobileMenu, showSidebarToggle = false }: TopNav
           ) : (
             <div className="flex items-center gap-2">
               <Link href="/login">
-                <NmButton variant="raised" size="sm" className="text-xs">
-                  Sign In
-                </NmButton>
+                <button className="px-4 py-1.5 text-xs font-semibold rounded-full bg-[var(--nm-surface-sunken)] text-[var(--nm-foreground)] border border-[var(--nm-border)] shadow-sm hover:bg-[var(--nm-surface-raised)] transition-all">
+                  Log in
+                </button>
               </Link>
               <Link href="/signup">
-                <NmButton variant="primary" size="sm" className="text-xs">
-                  Register
-                </NmButton>
+                <button className="px-4 py-1.5 text-xs font-semibold rounded-full bg-[var(--nm-surface-sunken)] text-[var(--nm-foreground)] border border-[var(--nm-border)] shadow-sm hover:bg-[var(--primary)] hover:text-white hover:border-[var(--primary)] transition-all">
+                  Sign up
+                </button>
               </Link>
             </div>
           )}
