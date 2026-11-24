@@ -1,0 +1,154 @@
+:root {
+  /* Modern Developer Light Palette */
+  --nm-bg: #f5f4ef;
+  --nm-surface: #ffffff;
+  --nm-surface-raised: #fbfbf9;
+  --nm-surface-sunken: #eeece4;
+  --nm-foreground: #1c1c1c;
+  --nm-muted-foreground: #66645e;
+  --nm-border: #e0ded6;
+  --nm-border-focus: #1b8b48;
+  --nm-shadow-light: rgba(255, 255, 255, 0.8);
+  --nm-shadow-dark: rgba(0, 0, 0, 0.06);
+
+  /* Brand Accents */
+  --primary: #1b8b48;
+  --primary-hover: #15733b;
+  --primary-container: #e8f9ef;
+  --primary-foreground: #ffffff;
+  --secondary: #476856;
+  --secondary-foreground: #ffffff;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  
+  /* Telemetry Accents */
+  --accent-gold: #d97706;
+  --accent-orange: #ea580c;
+  --accent-blue: #2563eb;
+  --accent-violet: #7c3aed;
+
+  /* Difficulty Badges */
+  --diff-easy: #16a34a;
+  --diff-easy-bg: rgba(22, 163, 74, 0.1);
+  --diff-medium: #d97706;
+  --diff-medium-bg: rgba(217, 119, 6, 0.1);
+  --diff-hard: #dc2626;
+  --diff-hard-bg: rgba(220, 38, 38, 0.1);
+
+  /* Glass Effects */
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(224, 222, 214, 0.8);
+}
+
+[data-theme="dark"],
+.dark {
+  /* Modern Mission-Control Dark Palette */
+  --nm-bg: #090d16;
+  --nm-surface: #111726;
+  --nm-surface-raised: #182033;
+  --nm-surface-sunken: #0c111e;
+  --nm-foreground: #e6e9f5;
+  --nm-muted-foreground: #9ba1b8;
+  --nm-border: #1e263d;
+  --nm-border-focus: #22c55e;
+  --nm-shadow-light: rgba(255, 255, 255, 0.02);
+  --nm-shadow-dark: rgba(0, 0, 0, 0.4);
+
+  /* Mission Accents - Green Theme matching Light Mode */
+  --primary: #22c55e;
+  --primary-hover: #16a34a;
+  --primary-container: rgba(34, 197, 94, 0.15);
+  --primary-foreground: #041a0d;
+  --secondary: #4ade80;
+  --secondary-foreground: #041a0d;
+  --tertiary: #10b981;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  /* Telemetry Accents */
+  --accent-gold: #eab308;
+  --accent-orange: #f97316;
+  --accent-blue: #38bdf8;
+  --accent-violet: #a855f7;
+
+  /* Calibrated Difficulties */
+  --diff-easy: #22c55e;
+  --diff-easy-bg: rgba(34, 197, 94, 0.15);
+  --diff-medium: #f59e0b;
+  --diff-medium-bg: rgba(245, 158, 11, 0.15);
+  --diff-hard: #ef4444;
+  --diff-hard-bg: rgba(239, 68, 68, 0.15);
+
+  /* Glass Effects */
+  --glass-bg: rgba(17, 23, 38, 0.85);
+  --glass-border: rgba(30, 38, 61, 0.8);
+}
+
+/* ==========================================================================
+   Clean Modern Flat / Low-Shadow Utilities (Replacing Heavy Neumorphism)
+   ========================================================================== */
+
+/* Raised Primary Surface (Cards, Islands, Shell) - Clean, crisp, bordered */
+.nm-flat {
+  background: var(--nm-surface);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--nm-border);
+  transition: all 0.18s ease;
+}
+
+/* Compact Raised Surface (Buttons, Chips, Action Items) */
+.nm-flat-sm {
+  background: var(--nm-surface);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--nm-border);
+  transition: all 0.15s ease;
+}
+
+/* Elevated Overlay / Modal Surface */
+.nm-flat-lg {
+  background: var(--nm-surface);
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.18), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--nm-border);
+  transition: all 0.2s ease;
+}
+
+/* Sunken / Recessed Well - Clean muted tone with crisp border */
+.nm-pressed {
+  background: var(--nm-surface-sunken);
+  box-shadow: none;
+  border: 1px solid var(--nm-border);
+  transition: all 0.15s ease;
+}
+
+/* Compact Sunken Surface (Icon Sockets, Mini Toggle Wells) */
+.nm-pressed-sm {
+  background: var(--nm-surface-sunken);
+  box-shadow: none;
+  border: 1px solid var(--nm-border);
+  transition: all 0.15s ease;
+}
+
+/* Interactive Button Hover & Focus */
+.nm-btn-tactile {
+  background: var(--nm-surface);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--nm-border);
+  transition: all 0.12s ease;
+}
+.nm-btn-tactile:hover:not(:disabled) {
+  background: var(--nm-surface-raised);
+  border-color: var(--nm-muted-foreground);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+}
+.nm-btn-tactile:active:not(:disabled) {
+  background: var(--nm-surface-sunken);
+  transform: translateY(1px);
+}
+
+/* Glass Island Overlay */
+.nm-glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+}
